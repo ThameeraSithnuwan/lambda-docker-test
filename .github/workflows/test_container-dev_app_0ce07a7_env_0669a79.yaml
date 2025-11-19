@@ -817,6 +817,8 @@ jobs:
                 exit 1
               fi
             
+      - name: temp
+        run: echo "your command here"
     needs:
       - build-and-push
       - _status_testing
