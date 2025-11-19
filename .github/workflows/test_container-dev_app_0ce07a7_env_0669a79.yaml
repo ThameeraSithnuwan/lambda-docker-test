@@ -801,6 +801,8 @@ jobs:
             
       - name: temp
         run: echo "your command here"
+      - name: hi
+        run: echo "your command here"
     needs:
       - build-and-push
       - _status_testing
