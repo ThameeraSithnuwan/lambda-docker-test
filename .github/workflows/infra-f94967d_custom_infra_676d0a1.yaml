@@ -1,13 +1,13 @@
 name: infra-f94967d_custom_infra_676d0a1 Pipeline (Skyu Generated)
 'on':
-  pull_request:
+  push:
     branches:
       - main
-    types:
-      - opened
-      - synchronize
-    paths:
-      - .github/workflows/infra-f94967d_custom_infra_676d0a1.yaml
+    paths-ignore:
+      - .github/workflows/**
+      - .trivyignore
+      - Readme.md
+      - README.md
   workflow_dispatch: {}
   repository_dispatch:
     types: pipeline_7b450f3b-6031-4e03-9797-3fa4035b46d0
