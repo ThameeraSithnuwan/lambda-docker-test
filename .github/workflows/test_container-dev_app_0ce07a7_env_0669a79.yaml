@@ -768,6 +768,7 @@ jobs:
                 echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
                 
       - name: Download commit ID artifact
+        run: ' '
         uses: actions/download-artifact@v4
         if: ${{ github.event.client_payload.tickets != null }}
         with:
