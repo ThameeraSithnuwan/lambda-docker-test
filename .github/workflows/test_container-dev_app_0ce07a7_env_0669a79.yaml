@@ -155,6 +155,16 @@ jobs:
   _status-pending:
     name: _status-pending
     steps:
+      - name: 'Run :: Decoding Secrets'
+        run: |2-
+
+                if [ ! -x "$(command -v jq)" ]; then
+                  echo "jq not found, installing..."
+                  sudo apt-get update
+                  sudo apt-get install -y jq
+                fi
+                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
+                
       - name: 'Run :: Start'
         run: |2-
 
@@ -193,16 +203,6 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Decoding Secrets'
-        run: |2-
-
-                if [ ! -x "$(command -v jq)" ]; then
-                  echo "jq not found, installing..."
-                  sudo apt-get update
-                  sudo apt-get install -y jq
-                fi
-                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
-                
       - name: 'Run :: Checkout repository'
         uses: actions/checkout@v4
         with:
@@ -228,6 +228,16 @@ jobs:
   _status_testing:
     name: _status_testing
     steps:
+      - name: 'Run :: Decoding Secrets'
+        run: |2-
+
+                if [ ! -x "$(command -v jq)" ]; then
+                  echo "jq not found, installing..."
+                  sudo apt-get update
+                  sudo apt-get install -y jq
+                fi
+                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
+                
       - name: 'Run :: Start'
         run: |2-
 
@@ -266,16 +276,6 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Decoding Secrets'
-        run: |2-
-
-                if [ ! -x "$(command -v jq)" ]; then
-                  echo "jq not found, installing..."
-                  sudo apt-get update
-                  sudo apt-get install -y jq
-                fi
-                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
-                
       - name: 'Run :: Pipeline Testing'
         run: |2-
 
@@ -289,6 +289,16 @@ jobs:
   _release-info:
     name: _release-info
     steps:
+      - name: 'Run :: Decoding Secrets'
+        run: |2-
+
+                if [ ! -x "$(command -v jq)" ]; then
+                  echo "jq not found, installing..."
+                  sudo apt-get update
+                  sudo apt-get install -y jq
+                fi
+                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
+                
       - name: 'Run :: Start'
         run: |2-
 
@@ -327,16 +337,6 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Decoding Secrets'
-        run: |2-
-
-                if [ ! -x "$(command -v jq)" ]; then
-                  echo "jq not found, installing..."
-                  sudo apt-get update
-                  sudo apt-get install -y jq
-                fi
-                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
-                
       - name: 'Run :: Pipeline Release'
         env:
           RELEASE_ID: ${{ github.event.client_payload.releaseData.releaseId }}
@@ -523,6 +523,16 @@ jobs:
   _status-success:
     name: _status-success
     steps:
+      - name: 'Run :: Decoding Secrets'
+        run: |2-
+
+                if [ ! -x "$(command -v jq)" ]; then
+                  echo "jq not found, installing..."
+                  sudo apt-get update
+                  sudo apt-get install -y jq
+                fi
+                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
+                
       - name: 'Run :: Start'
         run: |2-
 
@@ -561,16 +571,6 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Decoding Secrets'
-        run: |2-
-
-                if [ ! -x "$(command -v jq)" ]; then
-                  echo "jq not found, installing..."
-                  sudo apt-get update
-                  sudo apt-get install -y jq
-                fi
-                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
-                
       - name: 'Run :: Pipeline Success'
         env:
           RUN_ID: ${{ github.run_id }}
@@ -682,6 +682,28 @@ jobs:
   deploy:
     name: deploy
     steps:
+      - name: Download commit ID artifact
+        run: ' '
+        uses: actions/download-artifact@v4
+        if: ${{ github.event.client_payload.tickets != null }}
+        with:
+          name: commit-id-artifact
+          path: ./artifact
+        continue-on-error: true
+      - name: temp
+        run: echo "your command here"
+      - name: hi
+        run: echo "your command here"
+      - name: 'Run :: Decoding Secrets'
+        run: |2-
+
+                if [ ! -x "$(command -v jq)" ]; then
+                  echo "jq not found, installing..."
+                  sudo apt-get update
+                  sudo apt-get install -y jq
+                fi
+                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
+                
       - name: 'Run :: Start'
         run: |2-
 
@@ -720,24 +742,6 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Decoding Secrets'
-        run: |2-
-
-                if [ ! -x "$(command -v jq)" ]; then
-                  echo "jq not found, installing..."
-                  sudo apt-get update
-                  sudo apt-get install -y jq
-                fi
-                echo "${{ env.ENCODED_PIPELINE_SECRET }}" | base64 --decode | jq -r 'to_entries[] | "\(.key)=\(.value)"' | while read line; do echo "$line" >> $GITHUB_ENV; echo "::add-mask::${line#*=}"; done
-                
-      - name: Download commit ID artifact
-        run: ' '
-        uses: actions/download-artifact@v4
-        if: ${{ github.event.client_payload.tickets != null }}
-        with:
-          name: commit-id-artifact
-          path: ./artifact
-        continue-on-error: true
       - name: 'Run :: Deploy and Notify Resource Service'
         env:
           RUN_ID: ${{ github.run_id }}
@@ -770,10 +774,6 @@ jobs:
                 exit 1
               fi
             
-      - name: temp
-        run: echo "your command here"
-      - name: hi
-        run: echo "your command here"
     needs:
       - build-and-push
       - _status_testing
