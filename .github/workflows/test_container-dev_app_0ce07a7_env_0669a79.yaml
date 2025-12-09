@@ -518,7 +518,6 @@ jobs:
     outputs:
       stepsCanProceed: ${{ env.STEPS_CAN_PROCEED }}
     permissions: write-all
-    overrideDefaultSteps: false
     runs-on: ubuntu-latest
   _status-success:
     name: _status-success
