@@ -2,9 +2,6 @@ name: >-
   test-kube_ephemeral-sameera-2025-12-09-1_app_74afe68_ephemeral_env Pipeline
   (Skyu Generated)
 'on':
-  push:
-    branches:
-      - main
   workflow_dispatch: {}
   repository_dispatch:
     types: pipeline_2abc5212-2f94-42d3-8d97-d5d990c49b60
@@ -140,11 +137,10 @@ jobs:
                 echo "Skipping checkout..."
               fi
             
-      - name: 'Run :: Ephemeral Env Default'
+      - name: 'Run ::  Ephemeral Env Deployment Step'
         run: |2-
-
-              # NOTE: Ephemeral Env Default
-              echo "Hello Ephemeral Env Default from SkyU"
+           
+              echo "Add the steps needed to deploy your app to the ephemeral environment"
               
     needs:
       - _status-pending
