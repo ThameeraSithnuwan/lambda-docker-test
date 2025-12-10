@@ -4,7 +4,7 @@ name: >-
 'on':
   workflow_dispatch: {}
   repository_dispatch:
-    types: pipeline_1a56dbda-fe58-46bc-9528-73607a1a3ceb
+    types: pipeline_0a8d22e0-8ca7-4f24-8fdd-fa01c4fcc37e
 env:
   ENCODED_PIPELINE_SECRET: >-
     ${{secrets.LAMBDADOCKERTEST_TEST_EPHEMERALKUBETHAMEERANEW_APP_0CE07A7_EPHEMERAL_ENV}}
