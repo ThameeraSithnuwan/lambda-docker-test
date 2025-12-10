@@ -14,7 +14,7 @@ name: >-
       - README.md
   workflow_dispatch: {}
   repository_dispatch:
-    types: pipeline_7a09e6b7-0d58-4d99-b67f-f3e53bc42989
+    types: pipeline_2585583e-a31d-460e-bffc-3539fc3a15dd
 env:
   ENCODED_PIPELINE_SECRET: >-
     ${{secrets.LAMBDADOCKERTEST_TESTKUBE_EPHEMERALKUBESAMEERA202512091_APP_74AFE68_EPHEMERAL_ENV}}
