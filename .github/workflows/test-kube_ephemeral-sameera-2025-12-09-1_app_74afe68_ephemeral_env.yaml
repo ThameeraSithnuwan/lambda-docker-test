@@ -5,13 +5,6 @@ name: >-
   push:
     branches:
       - main
-    tags:
-      - v*
-    paths-ignore:
-      - .github/workflows/**
-      - .trivyignore
-      - Readme.md
-      - README.md
   workflow_dispatch: {}
   repository_dispatch:
     types: pipeline_2abc5212-2f94-42d3-8d97-d5d990c49b60
